@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en.gb"> 
+<head>
+    <title>home</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="leopard photoapp">
+    <meta author="Esther Ndungu">
+    <meta keywords="leopard, photos, app">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Leopard  </title>
+</head>
+<body> 
+    <header>
+<nav>
+<ul> 
+    
+    <li> <a href="index.html"> Home </a> </li>
+    <li> <a href="photoapp.html"id="active"> photoapp </a> </li>
+    <li> <a href="gallery.html"> gallery </a> </li>
+    <li> <a href="contact.html"> contact </a> </li>
+    <li> <a href="quiz.html" quiz </a> </li>
+
+</ul>
+
+</nav>
+
+
+    </header>
+<h1> What in the world </h1>
+<p> Hello Leopard </p>
+
+<h3> facts about Leopard</h3>
+
+<p>here are some interesting facts about Leopard  </p>
+<ul> <li> Beauty spots</li>
+<li> Fast runner</li>
+<li> Cat family</li>
+</ul>
+
+<h3> top 3 places leopards live </h3>
+
+<p>here are top three places leopards live  </p>
+<ol> <li> Jungle</li>
+<li> Forest</li>
+<li> Wilderness</li>
+</ol>
+<img src="Leopardimg.jpeg" alt="image of leopard on a tree looking for possible food">
+<p> For more information about the Leopard please visit the website <a href="https://en.wikipedia.org/wiki/Leopard"> Leopard 'wiki page </a></p>
+
+<h2> Submit your Leopard pictures here </h2>
+<form name="app" id="app">
+<fieldset>
+<legend> What gender is the Leopard? </legend>
+<input id="male" type="radio" name="gender" value= "male"> 
+<label for="Male"> Male </label>
+<br>
+<input id="female" type="radio" name="gender" value="female"> 
+<label for="female"> Female </label>
+<br>
+<input id="Nonbinary" type="radio" name="gender" value="Nonbinary"> 
+<label for="Nonbinary"> Nonbinary </label>
+<br>
+<input id="Prefer not to say" type="radio" name="gender" value="Prefer not to say"> 
+<label for="Prefer not to say"> Prefer not to say </label>
+
+</fieldset>
+<fieldset>
+<legend> What is the Leopards Personality?</legend>
+<input id="hangry" type="checkbox" name="Personality?" value="hangry"> 
+<label for=" hangry"> hangry </label>
+<br>
+<input id="charismatic" type="checkbox" name="Personality?" value="charismatic"> 
+<label for=" charismatic"> charismatic </label>
+<br>
+<input id="energetic" type="checkbox" name="Personality?" value="energetic"> 
+<label for=" energetic"> energetic </label>
+<br>
+<input id="focussed" type="checkbox" name="Personality?" value="focussed"> 
+<label for=" focussed"> focussed </label>
+</fieldset>
+
+<label for="url"> Enter your photo url </label>
+<input id="url" type="text" name="photourl">
+<input type="button" value="submit" onclick="saveFile()">
+
+
+</form>
+</body>
+
+
+</html>
+
+<script>
+    
+    let saveFile = () => {
+
+//This is setting the checkboxes as an array
+var form = document.getElementById('app');
+var myArray = [];
+    form.querySelectorAll('input').forEach(function (input) {
+        if(input.type === 'checkbox'  && input.checked) {
+            myArray.push(input.value)
+        }
+    })
+
+form = document.forms.app.elements;
+const gender = form.gender.value;
+const personality = myArray;
+const link = form.photourl.value;
+
+// This variable stores all the data.
+let data = 
+    '\r Gender?: ' + gender + ' \r\n ' + 
+    'Personality: ' + personality + ' \r\n ' + 
+    'Link: ' + link 
+
+// Convert the text to BLOB.
+const textToBLOB = new Blob([data], { type: 'text/plain' });
+const sFileName = "filename";	   // The file to save the data.
+
+let newLink = document.createElement("a");
+newLink.download = sFileName;
+newLink.innerHTML = "Download File:";
+
+if (window.webkitURL != null) {
+    newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+}
+else {
+    newLink.href = window.URL.createObjectURL(textToBLOB);
+    newLink.style.display = "none";
+    document.body.appendChild(newLink);
+}
+
+newLink.click(); 
+}
+</script>
